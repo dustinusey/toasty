@@ -1,0 +1,112 @@
+.toasty-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  height: auto;
+  width: 350px;
+  position: fixed;
+  gap: 0.5rem;
+}
+.toasty-container[data-position^="top-"] {
+  top: 0;
+}
+.toasty-container[data-position="top-center"] .toasty {
+  -webkit-transform: translateY(-100vh);
+  transform: translateY(-100vh);
+}
+.toasty-container[data-position^="bottom-"] {
+  bottom: 0;
+}
+.toasty-container[data-position="bottom-center"] .toasty {
+  -webkit-transform: translateY(100vh);
+  transform: translateY(100vh);
+}
+.toasty-container[data-position$="-right"] {
+  right: 0;
+}
+.toasty-container[data-position$="-right"] .toasty {
+  -webkit-transform: translateX(110%);
+  transform: translateX(110%);
+}
+.toasty-container[data-position$="-left"] {
+  left: 0;
+}
+.toasty-container[data-position$="-left"] .toasty {
+  -webkit-transform: translateX(-110%);
+  transform: translateX(-110%);
+}
+.toasty-container[data-position$="-center"] {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.toasty-container .toasty {
+  --dark: rgb(55, 60, 65);
+  border-radius: 5px;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 1.5rem 1rem;
+  margin: 5px;
+  background-color: white;
+  color: var(--dark);
+  border: 1px solid #ccc;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.055);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.055);
+  -webkit-transition: -webkit-transform 300ms ease-in-out;
+  transition: -webkit-transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+}
+.toasty-container .toasty.show {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.toasty-container .toasty.dark {
+  background-color: var(--dark);
+  color: #eee;
+  border-color: var(--dark);
+}
+.toasty-container .toasty.dark.progress::before {
+  border-color: var(--dark);
+}
+.toasty-container .toasty.success::before {
+  background-color: #76ebda;
+}
+.toasty-container .toasty.warning::before {
+  background-color: #fbdb9a;
+}
+.toasty-container .toasty.alert::before {
+  background-color: #f69494;
+}
+.toasty-container .toasty.progress::before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: calc(100% * var(--progress));
+  margin-left: auto;
+  bottom: 0;
+  left: 0;
+  border: 5px solid white;
+  border-radius: 25px;
+}
+.toasty-container .toasty.can-close {
+  cursor: pointer;
+}
+.toasty-container .toasty.can-close::after {
+  content: "×";
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  font-size: 1.5rem;
+}

@@ -1,0 +1,104 @@
+.toasty-container {
+  @include flex(column, nowrap, start, null);
+  @include size(auto, 350px);
+  position: fixed;
+  gap: 0.5rem;
+
+  // top positions
+  &[data-position^="top-"] {
+    top: 0;
+  }
+  &[data-position="top-center"] .toasty {
+    transform: translateY(-100vh);
+  }
+  // bottom positions
+  &[data-position^="bottom-"] {
+    bottom: 0;
+  }
+  &[data-position="bottom-center"] .toasty {
+    transform: translateY(100vh);
+  }
+
+  // right positions
+  &[data-position$="-right"] {
+    right: 0;
+    .toasty {
+      transform: translateX(110%);
+    }
+  }
+  // left positions
+  &[data-position$="-left"] {
+    left: 0;
+    .toasty {
+      transform: translateX(-110%);
+    }
+  }
+  // center positions
+  &[data-position$="-center"] {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .toasty {
+    --dark: rgb(55, 60, 65);
+    @include radius(5px);
+    position: relative;
+    box-sizing: border-box;
+    padding: 1.5rem 1rem;
+    margin: 5px;
+    background-color: white;
+    color: var(--dark);
+    border: 1px solid #ccc;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(black, 0.055);
+    transition: transform 300ms ease-in-out;
+    &.show {
+      transform: translate(0, 0);
+    }
+    &.dark {
+      background-color: var(--dark);
+      color: #eee;
+      border-color: var(--dark);
+      &.progress::before {
+        border-color: var(--dark);
+      }
+    }
+    &.success::before {
+      background-color: rgb(118, 235, 218);
+    }
+    &.warning::before {
+      background-color: rgb(251, 219, 154);
+    }
+    &.alert::before {
+      background-color: rgb(246, 148, 148);
+    }
+    &.progress::before {
+      content: "";
+      position: absolute;
+      height: 5px;
+      width: calc(100% * var(--progress));
+      margin-left: auto;
+      bottom: 0;
+      left: 0;
+      border: 5px solid white;
+      @include radius(25px);
+    }
+    &.can-close {
+      cursor: pointer;
+      &::after {
+        content: "\00D7";
+        position: absolute;
+        top: 3px;
+        right: 10px;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
